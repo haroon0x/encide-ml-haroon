@@ -5,12 +5,10 @@ This project is part of the **encide-ml competition**.
 
 ## Table of Contents
 - [Project Overview](#project-overview)
-- [Training Summary](#training-summary)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Model Inferencing](#model-inferencing)
-- [Contributing](#contributing)
-- [License](#license)
+- [Training Summary](#-training-summary)
+- [Installation](#how-to-run)
+- [Usage](#️-run-training)
+- [Model Inferencing](#️-run-training)
 
 ---
 
@@ -132,7 +130,7 @@ This project is part of the **encide-ml competition**.
    --output_log logs/train.log
 
 5. **Run the desired notebook or script** to train and evaluate a model.
-    ## 🔎 Model Inferencing
+   ## 🔎 Model Inferencing
 
     - To use a trained model for predicting a single image:
 
