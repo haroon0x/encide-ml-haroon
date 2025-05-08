@@ -1,9 +1,16 @@
 
-# Cat vs Dog Image Classifier - encide-ml
+# Image Classifier - encide-ml
 This repository contains code and resources for training and evaluating image classification models to distinguish between cats and dogs using TensorFlow/Keras.  
 This project is part of the **encide-ml competition**.
 
-
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Training Summary](#training-summary)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Model Inferencing](#model-inferencing)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
@@ -70,26 +77,16 @@ This project is part of the **encide-ml competition**.
 
 ---
 
-## Repository Structure
-.
-├── custom_cnn_training.ipynb # Custom CNN training notebook/script
-├── resnet50_training.ipynb # ResNet-50 training notebook/script
-├── dog_cat_model_s.keras # Saved custom CNN model (Keras format)
-├── complete_dog_cat_model.keras # Saved ResNet-50 model (Keras format)
-├── dog_cat_model.tflite # TensorFlow Lite export
-├── training_history.png # Training/validation accuracy/loss curves
-├── README.md # Project documentation
-└── (additional files as needed)
-
-## Repository Structure
-data/
-├── train/
-│   ├── cats/
-│   └── dogs/
-├── test/
-│   ├── cats/
-│   └── dogs/
-
+## Dataset Structure
+  ```
+   data/
+   ├── train/
+   │   ├── cats/
+   │   └── dogs/
+   ├── test/
+   │   ├── cats/
+   │   └── dogs/
+     ```
 
 ---
 
@@ -123,7 +120,18 @@ data/
    kaggle datasets download salader/dogs-vs-cats
    unzip dogs-vs-cats.zip -d data/
 
-4. **Run the desired notebook or script** to train and evaluate a model.
+4.   ## ⚙️ Run Training
+
+   ```bash
+   python src/train.py \
+   --train_dir data/train \
+   --test_dir data/test \
+   --batch_size 16 \
+   --epochs_frozen 15 \
+   --epochs_finetune 10 \
+   --output_log logs/train.log
+
+5. **Run the desired notebook or script** to train and evaluate a model.
     ## 🔎 Model Inferencing
 
     - To use a trained model for predicting a single image:
@@ -150,10 +158,14 @@ data/
     ```
     - For TFLite inference, use tf.lite.Interpreter instead.
 
-    ## 📊 View Results
+   ## 📊 View Results
 
    -  **Plot:** `logs/training_history.png`  
    - **Console log:** `logs/train.log`
+
+## Acknowledgements
+- Dataset: [Salader’s Dogs vs. Cats](https://www.kaggle.com/salader/dogs-vs-cats)  
+- Inspiration: [TensorFlow Transfer Learning Tutorial](https://www.tensorflow.org/tutorials/images/transfer_learning)  
 ---
 
 

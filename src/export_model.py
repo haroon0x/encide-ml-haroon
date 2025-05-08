@@ -1,9 +1,9 @@
 #exporting  model  for deployment.
 
-from model_custom import trained_model
+from model_custom import build_model
 import tensorflow as tf
 
-model = trained_model()
+model = build_model()
 model.save('complete_dog_cat_model.keras')
 
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
