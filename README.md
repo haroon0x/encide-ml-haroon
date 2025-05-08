@@ -112,7 +112,7 @@ This project is part of the **encide-ml competition**.
     ```
 
 3. **Prepare the dataset** 
-   # 📥 Download Kaggle Data
+   ## 📥 Download Kaggle Data
    
    ```bash
    kaggle datasets download salader/dogs-vs-cats
@@ -130,7 +130,7 @@ This project is part of the **encide-ml competition**.
    --output_log logs/train.log
 
 5. **Run the desired notebook or script** to train and evaluate a model.
-   ## 🔎 Model Inferencing
+      ## 🔎 Model Inferencing
 
     - To use a trained model for predicting a single image:
 
@@ -152,7 +152,6 @@ This project is part of the **encide-ml competition**.
     pred = model.predict(img_array)
     label = "Dog" if pred[0][0] > 0.5 else "Cat"
     print(f"Prediction: {label} ({pred[0][0]:.2f})")
-
     ```
     - For TFLite inference, use tf.lite.Interpreter instead.
 
