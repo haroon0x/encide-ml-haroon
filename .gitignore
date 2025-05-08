@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+
+
+# Environment files
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Dataset and model files
+*.h5
+*.hdf5
+*.ckpt
+*.pt
+*.pth
+*.pb
+*.tflite
+*.onnx
+
+
+# VSCode
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
