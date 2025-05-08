@@ -86,7 +86,7 @@ This project is part of the **encide-ml competition**.
    ├── test/
    │   ├── cats/
    │   └── dogs/
-     ```
+   ```
 
 ---
 
