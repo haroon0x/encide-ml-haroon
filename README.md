@@ -130,31 +130,7 @@ This project is part of the **encide-ml competition**.
    --output_log logs/train.log
 
 5. **Run the desired notebook or script** to train and evaluate a model.
-      ## 🔎 Model Inferencing
-
-    - To use a trained model for predicting a single image:
-
-    ```python
-    import tensorflow as tf
-    from tensorflow.keras.preprocessing import image
-    import numpy as np
-
-    # Load model
-    model = tf.keras.models.load_model("best_dog_cat_model_resnet.keras")  # or dog_cat_model_s.keras
    
-    # Load and preprocess image
-    img_path = "path_to_image.jpg"
-    img = image.load_img(img_path, target_size=(224, 224))
-    img_array = image.img_to_array(img) / 255.0
-    img_array = np.expand_dims(img_array, axis=0)
-
-    # Predict
-    pred = model.predict(img_array)
-    label = "Dog" if pred[0][0] > 0.5 else "Cat"
-    print(f"Prediction: {label} ({pred[0][0]:.2f})")
-    ```
-    - For TFLite inference, use tf.lite.Interpreter instead.
-
    ## 📊 View Results
 
    -  **Plot:** `logs/training_history.png`  
