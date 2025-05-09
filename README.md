@@ -1,7 +1,7 @@
 
 # Image Classifier - encide-ml
 This repository contains code and resources for training and evaluating image classification models to distinguish between cats and dogs using TensorFlow/Keras.  
-This project is part of the **encide-ml competition**.
+As part of the **encide-ml competition**.
 
 ## 📚 Table of Contents
 - [Project Overview](#project-overview)
@@ -12,6 +12,8 @@ This project is part of the **encide-ml competition**.
 - [How to Run](#how-to-run)
 - [Acknowledgements](#acknowledgements)
 ---
+
+Deployed on Gradio : https://c7ec5713e649415853.gradio.live/
 
 ## Project Overview
 
@@ -142,14 +144,16 @@ This project is part of the **encide-ml competition**.
 
 5. **Run the desired notebook or script** to train and evaluate a model.
    
-   ## 📊 View Results
+## 📊 View Results
 
-   -  **Plot:** `logs/training_history.png`  
-   - **Console log:** `logs/train.log`
+-  **Plot:** `logs/training_history.png`  
+- **Console log:** `logs/train.log`
 
 ## Acknowledgements
 - Dataset: [Salader’s Dogs vs. Cats](https://www.kaggle.com/salader/dogs-vs-cats)  
 - Inspiration: [TensorFlow Transfer Learning Tutorial](https://www.tensorflow.org/tutorials/images/transfer_learning)  
+
+
 ---
 
 
