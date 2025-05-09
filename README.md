@@ -16,15 +16,16 @@ This project is part of the **encide-ml competition**.
 
 - **Custom Convolutional Neural Network (CNN):**  
     Built from scratch with Conv2D, BatchNormalization, Dropout, and MaxPooling layers. Uses GlobalAveragePooling2D and dense layers for classification. Data augmentation and normalization are applied for better generalization.
-  - **Transfer Learning with ResNet-50:**  
+
+- **Transfer Learning with ResNet-50:**  
     Uses a pretrained ResNet-50 model (`include_top=False`) as a feature extractor, with custom dense layers on top for binary classification. The base model is initially frozen, then partially unfrozen for fine-tuning. Preprocessing includes normalization and ResNet-50-specific input scaling. Data augmentation is applied.
 - Training includes early stopping, learning rate scheduling, and model checkpointing to prevent overfitting and ensure the best results.
-- Both models are exported in Keras (`.keras`) and TensorFlow Lite (`.tflite`) formats for deployment or further use.
+-  models are exported in Keras (`.keras`) and TensorFlow Lite (`.tflite`) formats for deployment or further use.
 
-- 
+> **Note:**  
+> For this submission, I have trained the ResNet-50 model and am submitting this model as my final solution.
 
-
-
+- Kaggle Notebook : https://www.kaggle.com/code/haro0n/encide-catvsdog
 
 ## 📊 Training Summary
 
