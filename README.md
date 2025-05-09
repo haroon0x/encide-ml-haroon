@@ -13,8 +13,7 @@ As part of the **encide-ml competition**.
 - [Acknowledgements](#acknowledgements)
 ---
 
-Deployed on Gradio : https://c7ec5713e649415853.gradio.live/
-
+Deployed on Gradio : https://dd385c080c430f1f47.gradio.live
 ## Project Overview
 
 - **Custom Convolutional Neural Network (CNN):**  
