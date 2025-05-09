@@ -14,27 +14,30 @@ This project is part of the **encide-ml competition**.
 
 ## Project Overview
 
-- Implements two distinct models:
-  - **Custom Convolutional Neural Network (CNN):**  
-    Constructed from scratch using multiple Conv2D layers, each followed by BatchNormalization and Dropout for regularization. The architecture uses MaxPooling for spatial reduction and concludes with a GlobalAveragePooling2D layer before dense layers for classification. Data augmentation and normalization are applied at the input pipeline to enhance generalization.
+- **Custom Convolutional Neural Network (CNN):**  
+    Built from scratch with Conv2D, BatchNormalization, Dropout, and MaxPooling layers. Uses GlobalAveragePooling2D and dense layers for classification. Data augmentation and normalization are applied for better generalization.
   - **Transfer Learning with ResNet-50:**  
-    Utilizes a pretrained ResNet-50 model (`include_top=False`) as a feature extractor. Custom dense layers are added on top for binary classification. The base model is initially frozen during training, then partially unfrozen for fine-tuning. Preprocessing includes normalization and ResNet-50-specific input scaling. Data augmentation is also applied.
-- Training incorporates early stopping, learning rate scheduling, and model checkpointing to ensure optimal performance and prevent overfitting.
-- Both models are saved in Keras (`.keras`) and TensorFlow Lite (`.tflite`) formats for deployment or further use.
+    Uses a pretrained ResNet-50 model (`include_top=False`) as a feature extractor, with custom dense layers on top for binary classification. The base model is initially frozen, then partially unfrozen for fine-tuning. Preprocessing includes normalization and ResNet-50-specific input scaling. Data augmentation is applied.
+- Training includes early stopping, learning rate scheduling, and model checkpointing to prevent overfitting and ensure the best results.
+- Both models are exported in Keras (`.keras`) and TensorFlow Lite (`.tflite`) formats for deployment or further use.
+
+- 
 
 
 
 
 ## 📊 Training Summary
 
-- **Dataset:** ~20 000 images (train), 4 000 for validation, 5 000 test  
-- **Base model:** ResNet50 (ImageNet weights) frozen for 15 epochs, then top ~200 layers fine-tuned for 10 epochs  
-- **Best validation accuracy:** 77.0 % (Epoch 7)  
+- **Dataset:** ~10,000 images (train), 10,000 for validation, 5,000 test
+- **Base model:** ResNet50 (ImageNet weights), frozen for 15 epochs, then top ~200 layers fine-tuned for 10 epochs  
+- **Best validation accuracy:** **98.8%**  
 - **Final validation metrics:**  
-  - Accuracy: 76.4 %  
-  - AUC: 0.8508  
-  - Precision: 0.7225  
-  - Recall: 0.8692  
+  - **Accuracy:** 98.8%  
+  - **AUC:** 0.9993  
+  - **Precision:** 0.9868  
+  - **Recall:** 0.9890  
+  - **Loss:** 0.0297  
+
 
 ![Training History](/logs/training_history.png)
 
