@@ -17,7 +17,7 @@ train_data = tf.keras.utils.image_dataset_from_directory(
     image_size=(256, 256),
     shuffle=True,
     seed=123,
-    validation_split=0.2,
+    validation_split=0.5,
     subset='training',
     verbose=True,
 )
@@ -31,7 +31,7 @@ val_data = tf.keras.utils.image_dataset_from_directory(
     image_size=(256, 256),
     shuffle=True,
     seed=123,
-    validation_split=0.2,
+    validation_split=0.5,
     subset='validation',
     verbose=True,
 )
@@ -60,24 +60,13 @@ data_augmentation = Sequential([
 ])
 
 def build_model():
-    base_model = ResNet50(
-    weights='imagenet',
-    include_top=False,
-    input_shape=(256, 256, 3)
-    )
-    
+    base_model = ResNet50(weights='imagenet', include_top=False, input_shape=(256, 256, 3))
     base_model.trainable = False
-    
+
     inputs = Input(shape=(256, 256, 3))
-    
-    normalizer = Normalization(axis=-1)
-    normalizer.adapt(train_data.map(lambda x, y: x))
-    
-    x = normalizer(inputs)
-    x = data_augmentation(x)
+    x = data_augmentation(inputs)
     x = tf.keras.applications.resnet50.preprocess_input(x)
     x = base_model(x, training=False)
-    
     x = GlobalAveragePooling2D()(x)
     x = BatchNormalization()(x)
     x = Dropout(0.3)(x)
@@ -86,8 +75,9 @@ def build_model():
     x = Dropout(0.4)(x)
     x = Dense(128, activation='relu')(x)
     outputs = Dense(1, activation='sigmoid')(x)
-    
-    return Model(inputs, outputs)
+    model = Model(inputs, outputs)
+    model.base_model = base_model
+    return model
 
 model = build_model()
 
@@ -137,7 +127,7 @@ history = model.fit(
 )
 
 print("Phase 2: Fine-tuning the model...")
-base_model = model.layers[3]
+base_model = model.base_model
 base_model.trainable = True
 
 for layer in base_model.layers[:250]:
@@ -171,38 +161,38 @@ print(f"Final Validation Recall: {val_results[4]:.4f}")
 
 def plot_training_history(history, fine_tune_history=None):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
-    
+
     epochs_initial = range(1, len(history.history['accuracy']) + 1)
     ax1.plot(epochs_initial, history.history['accuracy'], 'b-', label='Training Accuracy')
     ax1.plot(epochs_initial, history.history['val_accuracy'], 'r-', label='Validation Accuracy')
-    
+
     if fine_tune_history:
-        epochs_fine = range(len(history.history['accuracy']) + 1, 
+        epochs_fine = range(len(history.history['accuracy']) + 1,
                           len(history.history['accuracy']) + len(fine_tune_history.history['accuracy']) + 1)
         ax1.plot(epochs_fine, fine_tune_history.history['accuracy'], 'g-', label='Fine-tuning Training Accuracy')
         ax1.plot(epochs_fine, fine_tune_history.history['val_accuracy'], 'm-', label='Fine-tuning Validation Accuracy')
-    
+
     ax1.set_title('Model Accuracy')
     ax1.set_xlabel('Epoch')
     ax1.set_ylabel('Accuracy')
     ax1.legend()
     ax1.grid(True)
-    
+
     ax2.plot(epochs_initial, history.history['loss'], 'b-', label='Training Loss')
     ax2.plot(epochs_initial, history.history['val_loss'], 'r-', label='Validation Loss')
-    
+
     if fine_tune_history:
-        epochs_fine = range(len(history.history['loss']) + 1, 
+        epochs_fine = range(len(history.history['loss']) + 1,
                           len(history.history['loss']) + len(fine_tune_history.history['loss']) + 1)
         ax2.plot(epochs_fine, fine_tune_history.history['loss'], 'g-', label='Fine-tuning Training Loss')
         ax2.plot(epochs_fine, fine_tune_history.history['val_loss'], 'm-', label='Fine-tuning Validation Loss')
-    
+
     ax2.set_title('Model Loss')
     ax2.set_xlabel('Epoch')
     ax2.set_ylabel('Loss')
     ax2.legend()
     ax2.grid(True)
-    
+
     plt.tight_layout()
     plt.savefig('training_history.png')
     plt.show()
@@ -222,10 +212,10 @@ def predict_image(image_path, model):
     img = image.load_img(image_path, target_size=(256, 256))
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
-    
+    img_array = tf.keras.applications.resnet50.preprocess_input(img_array)
     predictions = model.predict(img_array)
     score = predictions[0][0]
-    
+
     if score > 0.5:
         return f"Dog ({score:.2f})"
     else:

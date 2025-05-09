@@ -3,13 +3,14 @@
 This repository contains code and resources for training and evaluating image classification models to distinguish between cats and dogs using TensorFlow/Keras.  
 This project is part of the **encide-ml competition**.
 
-## Table of Contents
+## 📚 Table of Contents
 - [Project Overview](#project-overview)
 - [Training Summary](#-training-summary)
-- [Installation](#how-to-run)
-- [Usage](#️-run-training)
-- [Model Inferencing](#️-run-training)
-
+- [Technologies & Dependencies](#technologies--dependencies)
+- [Workflow](#workflow)
+- [Dataset Structure](#dataset-structure)
+- [How to Run](#how-to-run)
+- [Acknowledgements](#acknowledgements)
 ---
 
 ## Project Overview
@@ -20,10 +21,16 @@ This project is part of the **encide-ml competition**.
 - **Transfer Learning with ResNet-50:**  
     Uses a pretrained ResNet-50 model (`include_top=False`) as a feature extractor, with custom dense layers on top for binary classification. The base model is initially frozen, then partially unfrozen for fine-tuning. Preprocessing includes normalization and ResNet-50-specific input scaling. Data augmentation is applied.
 - Training includes early stopping, learning rate scheduling, and model checkpointing to prevent overfitting and ensure the best results.
--  models are exported in Keras (`.keras`) and TensorFlow Lite (`.tflite`) formats for deployment or further use.
+- models are exported in Keras (`.keras`) and TensorFlow Lite (`.tflite`) formats for deployment or further use.
 
 > **Note:**  
-> For this submission, I have trained the ResNet-50 model and am submitting this model as my final solution.
+> For this submission, I have trained the ResNet-50 model and am submitting this model as my final solution.  
+> The first model I trained achieved a validation accuracy of **76.4%** (AUC: 0.8508, Precision: 0.7225, Recall: 0.8692, Loss: 0.5540).  
+> The new ResNet-50 model achieves a **much higher validation accuracy of 98.8%** (AUC: 0.9993, Precision: 0.9868, Recall: 0.9890, Loss: 0.0297),  
+> showing improvement in all key metrics.  
+>
+> **This improvement is due to correcting the input preprocessing:**  
+> I removed the extra normalization layer and now use only `tf.keras.applications.resnet50.preprocess_input`, which ensures the data matches what ResNet-50 expects.
 
 - Kaggle Notebook : https://www.kaggle.com/code/haro0n/encide-catvsdog
 
